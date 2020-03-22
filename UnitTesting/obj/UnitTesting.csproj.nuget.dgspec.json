@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alexandra\\Desktop\\UnitTesting\\UnitTesting\\UnitTesting.csproj": {}
+    "C:\\Users\\Alexandra\\Documents\\Repositories\\Personal\\poc-unit-tests\\UnitTesting\\UnitTesting.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alexandra\\Desktop\\UnitTesting\\UnitTesting\\UnitTesting.csproj": {
+    "C:\\Users\\Alexandra\\Documents\\Repositories\\Personal\\poc-unit-tests\\UnitTesting\\UnitTesting.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alexandra\\Desktop\\UnitTesting\\UnitTesting\\UnitTesting.csproj",
+        "projectUniqueName": "C:\\Users\\Alexandra\\Documents\\Repositories\\Personal\\poc-unit-tests\\UnitTesting\\UnitTesting.csproj",
         "projectName": "UnitTesting",
-        "projectPath": "C:\\Users\\Alexandra\\Desktop\\UnitTesting\\UnitTesting\\UnitTesting.csproj",
+        "projectPath": "C:\\Users\\Alexandra\\Documents\\Repositories\\Personal\\poc-unit-tests\\UnitTesting\\UnitTesting.csproj",
         "packagesPath": "C:\\Users\\Alexandra\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alexandra\\Desktop\\UnitTesting\\UnitTesting\\obj\\",
+        "outputPath": "C:\\Users\\Alexandra\\Documents\\Repositories\\Personal\\poc-unit-tests\\UnitTesting\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Alexandra\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -37,6 +37,16 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Moq": {
+              "target": "Package",
+              "version": "[4.13.1, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.12.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
