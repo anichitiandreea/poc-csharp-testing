@@ -1,4 +1,0 @@
-C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\obj\Debug\netcoreapp3.1\UnitTesting.csproj.CoreCompileInputs.cache
-C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\obj\Debug\netcoreapp3.1\UnitTesting.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\obj\Debug\netcoreapp3.1\UnitTesting.AssemblyInfoInputs.cache
-C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\obj\Debug\netcoreapp3.1\UnitTesting.AssemblyInfo.cs
