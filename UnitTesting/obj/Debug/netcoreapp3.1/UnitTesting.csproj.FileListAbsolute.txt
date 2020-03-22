@@ -1,12 +1,4 @@
-C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\bin\Debug\netcoreapp3.1\appsettings.Development.json
-C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
-C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\bin\Debug\netcoreapp3.1\UnitTesting.exe
-C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\obj\Debug\netcoreapp3.1\UnitTesting.csprojAssemblyReference.cache
+C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\obj\Debug\netcoreapp3.1\UnitTesting.csproj.CoreCompileInputs.cache
+C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\obj\Debug\netcoreapp3.1\UnitTesting.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\obj\Debug\netcoreapp3.1\UnitTesting.AssemblyInfoInputs.cache
 C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\obj\Debug\netcoreapp3.1\UnitTesting.AssemblyInfo.cs
-C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\obj\Debug\netcoreapp3.1\UnitTesting.RazorTargetAssemblyInfo.cache
-C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\obj\Debug\netcoreapp3.1\staticwebassets\UnitTesting.StaticWebAssets.Manifest.cache
-C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\obj\Debug\netcoreapp3.1\staticwebassets\UnitTesting.StaticWebAssets.xml
-C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\bin\Debug\netcoreapp3.1\nunit.framework.dll
-C:\Users\Alexandra\Documents\Repositories\Personal\poc-unit-tests\UnitTesting\obj\Debug\netcoreapp3.1\UnitTesting.csproj.CopyComplete

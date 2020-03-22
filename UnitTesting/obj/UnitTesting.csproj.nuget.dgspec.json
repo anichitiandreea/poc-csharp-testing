@@ -37,16 +37,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "dependencies": {
-            "Moq": {
-              "target": "Package",
-              "version": "[4.13.1, )"
-            },
-            "NUnit": {
-              "target": "Package",
-              "version": "[3.12.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
