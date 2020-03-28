@@ -9,9 +9,9 @@ namespace UnitTesting.Data
         {
         }
 
-        DbSet<Question> Questions { get; set; }
-        DbSet<Answer> Answers { get; set; }
-        DbSet<User> Users { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
