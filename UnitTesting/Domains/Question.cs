@@ -9,6 +9,5 @@ namespace UnitTesting.Domains
         public string Title { get; set; }
         public string Description { get; set; }
         public List<Answer> Answers {get; set;}
-        public User User { get; set; }
     }
 }
