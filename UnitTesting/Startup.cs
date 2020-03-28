@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UnitTesting.Data;
+using UnitTesting.Services;
+using UnitTesting.Services.Interfaces;
 
 namespace UnitTesting
 {
@@ -15,6 +17,7 @@ namespace UnitTesting
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DatabaseContext>(options => options.UseNpgsql("Server=192.168.0.52;Port=5432;Database=UnitTesting;User Id=postgres;Password=parola;"));
+            services.AddScoped<IQuestionService, QuestionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
