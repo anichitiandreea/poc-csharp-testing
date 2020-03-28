@@ -18,6 +18,7 @@ namespace UnitTesting
         {
             services.AddDbContext<DatabaseContext>(options => options.UseNpgsql("Server=192.168.0.52;Port=5432;Database=UnitTesting;User Id=postgres;Password=parola;"));
             services.AddScoped<IQuestionService, QuestionService>();
+            services.AddScoped<IAnswerService, AnswerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
