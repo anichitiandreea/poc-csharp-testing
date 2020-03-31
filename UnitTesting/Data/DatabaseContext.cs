@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UnitTesting.Domains;
+using UnitTesting.Domain;
 
 namespace UnitTesting.Data
 {

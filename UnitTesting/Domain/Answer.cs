@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UnitTesting.Domains
+namespace UnitTesting.Domain
 {
     public class Answer : Entity
     {

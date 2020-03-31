@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace UnitTesting.Domains
+namespace UnitTesting.Domain
 {
-    public class Entity
+    public abstract class Entity
     {
         public Guid Id { get; set; }
         public bool IsDeleted { get; set; }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UnitTesting.Domains
+namespace UnitTesting.Domain
 {
     public class Question : Entity
     {

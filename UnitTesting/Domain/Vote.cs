@@ -1,4 +1,4 @@
-﻿namespace UnitTesting.Domains
+﻿namespace UnitTesting.Domain
 {
     public class Vote : Entity
     {

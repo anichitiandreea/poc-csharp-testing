@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnitTesting.Domains;
+using UnitTesting.Domain;
 using UnitTesting.Services.Interfaces;
 
 namespace UnitTesting.Controllers

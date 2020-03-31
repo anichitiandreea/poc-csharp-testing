@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnitTesting.Domains;
+using UnitTesting.Domain;
 
 namespace UnitTesting.Services.Interfaces
 {
