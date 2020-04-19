@@ -6,11 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Bogus" Version="29.0.2" />
     <PackageReference Include="coverlet.collector" Version="1.2.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
