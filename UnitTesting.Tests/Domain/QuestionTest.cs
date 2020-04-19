@@ -11,27 +11,27 @@ namespace UnitTesting.Tests.Domain
         [Test]
         public void GivenQuestionEntityWhenGeneratedWithDataFakerThenVerifyAllProperties()
         {
-            // Arrange
+            //Arrange
             IDataFaker dataFaker = new DataFaker.DataFaker();
 
-            // Act
+            //Act
             var questions = dataFaker.FakeQuestion.Generate(count: 99);
 
-            // Assert
-            questions.ForEach(channel =>
+            //Assert
+            questions.ForEach(question =>
             {
-                Assert.That(channel.Id, Is.Not.Null);
-                Assert.That(channel.Title, Is.Not.Null);
-                Assert.That(channel.Title, Is.Not.Empty);
-                Assert.That(channel.Title.Length, Is.InRange(1, 50));
-                Assert.That(channel.Description, Is.Not.Null);
-                Assert.That(channel.Description, Is.Not.Empty);
-                Assert.That(channel.Description.Length, Is.InRange(1, 100));
-                Assert.That(channel.UserId, Is.Not.Null);
-                Assert.That(channel.Answers, Is.Not.Null);
-                Assert.That(channel.Answers, Is.Not.Empty);
-                Assert.That(channel.Answers, Is.InstanceOf<IEnumerable<Answer>>());
-                Assert.That(channel.IsDeleted, Is.Not.Null);
+                Assert.That(question.Id, Is.Not.Null);
+                Assert.That(question.Title, Is.Not.Null);
+                Assert.That(question.Title, Is.Not.Empty);
+                Assert.That(question.Title.Length, Is.InRange(1, 50));
+                Assert.That(question.Description, Is.Not.Null);
+                Assert.That(question.Description, Is.Not.Empty);
+                Assert.That(question.Description.Length, Is.InRange(1, 100));
+                Assert.That(question.UserId, Is.Not.Null);
+                Assert.That(question.Answers, Is.Not.Null);
+                Assert.That(question.Answers, Is.Not.Empty);
+                Assert.That(question.Answers, Is.InstanceOf<IEnumerable<Answer>>());
+                Assert.That(question.IsDeleted, Is.Not.Null);
             });
         }
     }

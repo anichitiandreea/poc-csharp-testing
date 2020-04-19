@@ -14,10 +14,9 @@ namespace UnitTesting.Data
         public DbSet<Answer> Answers { get; set; }
         public DbSet<User> Users { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            modelBuilder.ApplyConfiguration(new QuestionConfiguration());
-            modelBuilder.UseIdentityColumns();
+            builder.ApplyConfiguration(new QuestionConfiguration());
         }
     }
 }

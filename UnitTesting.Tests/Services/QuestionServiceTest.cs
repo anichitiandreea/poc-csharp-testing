@@ -124,7 +124,7 @@ namespace UnitTesting.Tests.Services
             await service.UpdateAsync(updatedQuestion);
 
             //Assert
-            context.Questions.FirstOrDefault().Title.Should().Be("Question1 updated");
+            context.Questions.FirstOrDefault().Should().Be(updatedQuestion);
         }
 
         [Test]

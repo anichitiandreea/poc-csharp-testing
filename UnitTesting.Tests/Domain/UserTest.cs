@@ -11,13 +11,13 @@ namespace UnitTesting.Tests.Domain
         [Test]
         public void GivenUserEntityWhenGeneratedWithDataFakerThenVerifyAllProperties()
         {
-            // Arrange
+            //Arrange
             IDataFaker dataFaker = new DataFaker.DataFaker();
 
-            // Act
+            //Act
             var users = dataFaker.FakeUser.Generate(count: 99);
 
-            // Assert
+            //Assert
             users.ForEach(user =>
             {
                 Assert.That(user.Id, Is.Not.Null);

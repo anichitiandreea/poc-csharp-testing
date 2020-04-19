@@ -8,6 +8,7 @@ using UnitTesting.Services.Interfaces;
 namespace UnitTesting.Controllers
 {
     [ApiController]
+    [Route("question")]
     public class QuestionController : ControllerBase
     {
         private readonly IQuestionService questionService;
@@ -22,7 +23,7 @@ namespace UnitTesting.Controllers
             {
                 var questions = await questionService.GetAllAsync();
 
-                if(questions is null)
+                if (questions is null)
                 {
                     return NotFound();
                 }
@@ -41,7 +42,7 @@ namespace UnitTesting.Controllers
             {
                 var question = await questionService.GetByIdAsync(id);
 
-                if(question is null)
+                if (question is null)
                 {
                     return NotFound();
                 }
@@ -83,6 +84,7 @@ namespace UnitTesting.Controllers
             }
         }
 
+        [HttpPut]
         public async Task<IActionResult> UpdateAsync(Question question)
         {
             try
@@ -117,7 +119,7 @@ namespace UnitTesting.Controllers
             {
                 var question = await questionService.GetByIdAsync(id);
 
-                if(question is null)
+                if (question is null)
                 {
                     return NotFound();
                 }

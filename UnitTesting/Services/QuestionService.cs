@@ -26,7 +26,9 @@ namespace UnitTesting.Services
         public async Task<Question> GetByIdAsync(Guid id)
         {
             return await context.Questions
-                .Where(question => question.Id == id
+                .AsNoTracking()
+                .Where(question =>
+                    question.Id == id
                     && question.IsDeleted == false)
                 .FirstOrDefaultAsync();
         }

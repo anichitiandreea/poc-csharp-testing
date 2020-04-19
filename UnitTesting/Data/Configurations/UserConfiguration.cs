@@ -1,18 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using UnitTesting.Domain;
 
 namespace UnitTesting.Data.Configurations
 {
-    public class UserConfiguration
+    public class UserConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<User> modelBuilder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
-            modelBuilder
+            builder.HasKey(user => user.Id);
+
+            builder
                 .HasMany(user => user.Questions)
                 .WithOne()
                 .HasForeignKey(question => question.UserId);
 
-            modelBuilder
+            builder
                 .HasMany(user => user.Answers)
                 .WithOne()
                 .HasForeignKey(answer => answer.UserId);

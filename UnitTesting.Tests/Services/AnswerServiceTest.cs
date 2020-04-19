@@ -4,7 +4,6 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UnitTesting.Domain;
 using UnitTesting.Services;
@@ -121,7 +120,7 @@ namespace UnitTesting.Tests.Services
             await service.UpdateAsync(updatedQuestion);
 
             //Assert
-            context.Answers.LastOrDefault().Description.Should().Be("Description1 updated");
+            context.Answers.LastOrDefault().Should().Be(updatedQuestion);
         }
 
         [Test]
