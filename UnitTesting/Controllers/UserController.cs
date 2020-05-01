@@ -7,6 +7,8 @@ using UnitTesting.Services.Interfaces;
 
 namespace UnitTesting.Controllers
 {
+    [ApiController]
+    [Route("users")]
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
@@ -15,6 +17,7 @@ namespace UnitTesting.Controllers
             this.userService = userService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
             try
@@ -34,6 +37,7 @@ namespace UnitTesting.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             try
@@ -53,6 +57,7 @@ namespace UnitTesting.Controllers
             }
         }
 
+        [HttpPost]
         public async Task<IActionResult> CreateAsync(User user)
         {
             try
@@ -67,6 +72,7 @@ namespace UnitTesting.Controllers
             }
         }
 
+        [HttpPost]
         public async Task<IActionResult> CreateBulkAsync(IList<User> users)
         {
             try
@@ -81,6 +87,7 @@ namespace UnitTesting.Controllers
             }
         }
 
+        [HttpPut]
         public async Task<IActionResult> UpdateAsync(User user)
         {
             try
@@ -95,6 +102,7 @@ namespace UnitTesting.Controllers
             }
         }
 
+        [HttpPut]
         public async Task<IActionResult> UpdateBulkAsync(IList<User> users)
         {
             try
@@ -109,6 +117,7 @@ namespace UnitTesting.Controllers
             }
         }
 
+        [HttpDelete]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             try
@@ -130,6 +139,7 @@ namespace UnitTesting.Controllers
             }
         }
 
+        [HttpDelete]
         public async Task<IActionResult> DeleteBulkAsync(IList<User> users)
         {
             try
