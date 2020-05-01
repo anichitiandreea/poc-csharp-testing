@@ -8,7 +8,7 @@ using UnitTesting.Services.Interfaces;
 namespace UnitTesting.Controllers
 {
     [ApiController]
-    [Route("question")]
+    [Route("questions")]
     public class QuestionController : ControllerBase
     {
         private readonly IQuestionService questionService;
@@ -17,6 +17,7 @@ namespace UnitTesting.Controllers
             this.questionService = questionService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
             try
@@ -36,6 +37,7 @@ namespace UnitTesting.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             try
@@ -55,6 +57,7 @@ namespace UnitTesting.Controllers
             }
         }
 
+        [HttpPost]
         public async Task<IActionResult> CreateAsync(Question question)
         {
             try
@@ -70,6 +73,7 @@ namespace UnitTesting.Controllers
             }
         }
 
+        [HttpPost]
         public async Task<IActionResult> CreateBulkAsync(IList<Question> questions)
         {
             try
@@ -99,6 +103,7 @@ namespace UnitTesting.Controllers
             }
         }
 
+        [HttpPut]
         public async Task<IActionResult> UpdateBulkAsync(IList<Question> questions)
         {
             try
@@ -113,6 +118,7 @@ namespace UnitTesting.Controllers
             }
         }
 
+        [HttpDelete]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             try
@@ -134,6 +140,7 @@ namespace UnitTesting.Controllers
             }
         }
 
+        [HttpDelete]
         public async Task<IActionResult> DeleteBulkAsync(IList<Question> questions)
         {
             try
