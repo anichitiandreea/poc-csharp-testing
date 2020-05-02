@@ -8,7 +8,7 @@ using UnitTesting.Services.Interfaces;
 namespace UnitTesting.Controllers
 {
     [ApiController]
-    [Route("users")]
+    [Route("{controller}")]
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
@@ -37,7 +37,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             try
@@ -117,7 +117,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             try

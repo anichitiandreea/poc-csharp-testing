@@ -8,13 +8,13 @@ using UnitTesting.Services.Interfaces;
 namespace UnitTesting.Controllers
 {
     [ApiController]
-    [Route("answers")]
-    public class AnswerController : ControllerBase
+    [Route("{controller}")]
+    public class QuestionController : ControllerBase
     {
-        private readonly IAnswerService answerService;
-        public AnswerController(IAnswerService answerService)
+        private readonly IQuestionService questionService;
+        public QuestionController(IQuestionService questionService)
         {
-            this.answerService = answerService;
+            this.questionService = questionService;
         }
 
         [HttpGet]
@@ -22,65 +22,80 @@ namespace UnitTesting.Controllers
         {
             try
             {
-                var answers = await answerService.GetAllAsync();
+                var questions = await questionService.GetAllAsync();
 
-                if (answers is null)
+                if (questions is null)
                 {
                     return NotFound();
                 }
 
-                return Ok(answers);
+                return Ok(questions);
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 return BadRequest(exception);
             }
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             try
             {
-                var answer = await answerService.GetByIdAsync(id);
+                var question = await questionService.GetByIdAsync(id);
 
-                if (answer is null)
+                if (question is null)
                 {
                     return NotFound();
                 }
 
-                return Ok(answer);
+                return Ok(question);
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 return BadRequest(exception);
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(Answer answer)
+        public async Task<IActionResult> CreateAsync(Question question)
         {
             try
             {
-                await answerService.CreateAsync(answer);
+                await questionService.CreateAsync(question);
 
-                return StatusCode(201, answer);
+                return StatusCode(201, question);
 
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 return BadRequest(exception);
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateBulkAsync(IList<Answer> answers)
+        public async Task<IActionResult> CreateBulkAsync(IList<Question> questions)
         {
             try
             {
-                await answerService.CreateBulkAsync(answers);
+                await questionService.CreateBulkAsync(questions);
 
-                return StatusCode(201, answers);
+                return StatusCode(201, questions);
+            }
+            catch(Exception exception)
+            {
+                return BadRequest(exception);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateAsync(Question question)
+        {
+            try
+            {
+                await questionService.UpdateAsync(question);
+
+                return Ok(question);
             }
             catch (Exception exception)
             {
@@ -89,13 +104,13 @@ namespace UnitTesting.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync(Answer answer)
+        public async Task<IActionResult> UpdateBulkAsync(IList<Question> questions)
         {
             try
             {
-                await answerService.UpdateAsync(answer);
+                await questionService.UpdateBulkAsync(questions);
 
-                return Ok(answer);
+                return Ok(questions);
             }
             catch (Exception exception)
             {
@@ -103,36 +118,21 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateBulkAsync(IList<Answer> answers)
-        {
-            try
-            {
-                await answerService.UpdateBulkAsync(answers);
-
-                return Ok(answers);
-            }
-            catch (Exception exception)
-            {
-                return BadRequest(exception);
-            }
-        }
-
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             try
             {
-                var answer = await answerService.GetByIdAsync(id);
+                var question = await questionService.GetByIdAsync(id);
 
-                if (answer is null)
+                if (question is null)
                 {
                     return NotFound();
                 }
 
-                await answerService.DeleteAsync(answer);
+                await questionService.DeleteAsync(question);
 
-                return Ok(answer);
+                return Ok(question);
             }
             catch (Exception exception)
             {
@@ -141,13 +141,13 @@ namespace UnitTesting.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteBulkAsync(IList<Answer> answers)
+        public async Task<IActionResult> DeleteBulkAsync(IList<Question> questions)
         {
             try
             {
-                await answerService.DeleteBulkAsync(answers);
+                await questionService.DeleteBulkAsync(questions);
 
-                return Ok(answers);
+                return Ok(questions);
             }
             catch (Exception exception)
             {
