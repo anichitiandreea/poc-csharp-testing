@@ -8,7 +8,7 @@ using UnitTesting.Services.Interfaces;
 namespace UnitTesting.Controllers
 {
     [ApiController]
-    [Route("{controller}")]
+    [Route("[controller]")]
     public class QuestionController : ControllerBase
     {
         private readonly IQuestionService questionService;

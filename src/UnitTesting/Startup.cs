@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UnitTesting.Data;
@@ -11,10 +12,16 @@ namespace UnitTesting
 {
     public class Startup
     {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<DatabaseContext>(options => options.UseNpgsql("Server=192.168.0.52;Port=5432;Database=UnitTesting;User Id=postgres;Password=parola;"));
+            services.AddDbContext<DatabaseContext>(options => options.UseNpgsql("Server=192.168.0.73;Port=5432;Database=UnitTesting;User Id=postgres;Password=parola;"));
 
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IAnswerService, AnswerService>();

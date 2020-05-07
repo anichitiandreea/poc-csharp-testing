@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UnitTesting\UnitTesting.csproj" />
+    <ProjectReference Include="..\..\src\UnitTesting\UnitTesting.csproj" />
   </ItemGroup>
 
 </Project>
