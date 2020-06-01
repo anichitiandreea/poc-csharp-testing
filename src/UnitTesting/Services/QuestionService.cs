@@ -35,7 +35,8 @@ namespace UnitTesting.Services
 
         public async Task CreateAsync(Question question)
         {
-            context.Questions.Add(question);
+            await context.Questions.AddAsync(question);
+
             await context.SaveChangesAsync();
         }
 
@@ -59,13 +60,22 @@ namespace UnitTesting.Services
 
         public async Task DeleteAsync(Question question)
         {
-            context.Questions.Remove(question);
+            question.IsDeleted = true;
+            context.Attach(question);
+            context.Entry(question).Property("IsDeleted").IsModified = true;
+
             await context.SaveChangesAsync();
         }
 
         public async Task DeleteBulkAsync(IList<Question> questions)
         {
-            context.Questions.RemoveRange(questions);
+            foreach (var question in questions)
+            {
+                question.IsDeleted = true;
+                context.Attach(question);
+                context.Entry(question).Property("IsDeleted").IsModified = true;
+            }
+
             await context.SaveChangesAsync();
         }
     }
