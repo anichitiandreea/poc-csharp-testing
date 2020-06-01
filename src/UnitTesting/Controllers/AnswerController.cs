@@ -8,7 +8,6 @@ using UnitTesting.Services.Interfaces;
 namespace UnitTesting.Controllers
 {
     [ApiController]
-    [Route("{controller}")]
     public class AnswerController : ControllerBase
     {
         private readonly IAnswerService answerService;
@@ -17,7 +16,7 @@ namespace UnitTesting.Controllers
             this.answerService = answerService;
         }
 
-        [HttpGet]
+        [HttpGet("answers")]
         public async Task<IActionResult> GetAllAsync()
         {
             try
@@ -37,7 +36,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("answers/{id}")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             try
@@ -57,7 +56,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("answers")]
         public async Task<IActionResult> CreateAsync(Answer answer)
         {
             try
@@ -73,7 +72,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("answers/bulk")]
         public async Task<IActionResult> CreateBulkAsync(IList<Answer> answers)
         {
             try
@@ -88,7 +87,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("answers")]
         public async Task<IActionResult> UpdateAsync(Answer answer)
         {
             try
@@ -103,7 +102,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("answers/bulk")]
         public async Task<IActionResult> UpdateBulkAsync(IList<Answer> answers)
         {
             try
@@ -118,7 +117,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("answers/{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             try
@@ -140,7 +139,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("answers/bulk")]
         public async Task<IActionResult> DeleteBulkAsync(IList<Answer> answers)
         {
             try
