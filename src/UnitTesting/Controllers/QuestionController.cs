@@ -2,13 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using UnitTesting.Domain;
 using UnitTesting.Services.Interfaces;
 
 namespace UnitTesting.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class QuestionController : ControllerBase
     {
         private readonly IQuestionService questionService;
@@ -17,7 +17,7 @@ namespace UnitTesting.Controllers
             this.questionService = questionService;
         }
 
-        [HttpGet]
+        [HttpGet("questions")]
         public async Task<IActionResult> GetAllAsync()
         {
             try
@@ -37,7 +37,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("questions/{id}")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             try
@@ -57,15 +57,14 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateAsync(Question question)
+        [HttpPost("questions")]
+        public async Task<IActionResult> CreateAsync([FromBody]Question question)
         {
             try
             {
                 await questionService.CreateAsync(question);
 
                 return StatusCode(201, question);
-
             }
             catch(Exception exception)
             {
@@ -73,7 +72,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("questions/bulk")]
         public async Task<IActionResult> CreateBulkAsync(IList<Question> questions)
         {
             try
@@ -88,7 +87,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("questions")]
         public async Task<IActionResult> UpdateAsync(Question question)
         {
             try
@@ -103,7 +102,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("questions/bulk")]
         public async Task<IActionResult> UpdateBulkAsync(IList<Question> questions)
         {
             try
@@ -118,7 +117,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("questions/{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             try
@@ -140,7 +139,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("questions/bulk")]
         public async Task<IActionResult> DeleteBulkAsync(IList<Question> questions)
         {
             try
