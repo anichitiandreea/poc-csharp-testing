@@ -8,7 +8,6 @@ using UnitTesting.Services.Interfaces;
 namespace UnitTesting.Controllers
 {
     [ApiController]
-    [Route("{controller}")]
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
@@ -17,7 +16,7 @@ namespace UnitTesting.Controllers
             this.userService = userService;
         }
 
-        [HttpGet]
+        [HttpGet("users")]
         public async Task<IActionResult> GetAllAsync()
         {
             try
@@ -37,7 +36,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("users/{id}")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
             try
@@ -57,7 +56,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("users")]
         public async Task<IActionResult> CreateAsync(User user)
         {
             try
@@ -72,7 +71,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost("users/bulk")]
         public async Task<IActionResult> CreateBulkAsync(IList<User> users)
         {
             try
@@ -87,7 +86,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("users")]
         public async Task<IActionResult> UpdateAsync(User user)
         {
             try
@@ -102,7 +101,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("users/bulk")]
         public async Task<IActionResult> UpdateBulkAsync(IList<User> users)
         {
             try
@@ -117,7 +116,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("users/{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id)
         {
             try
@@ -139,7 +138,7 @@ namespace UnitTesting.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("users/bulk")]
         public async Task<IActionResult> DeleteBulkAsync(IList<User> users)
         {
             try
