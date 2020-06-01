@@ -26,8 +26,7 @@ namespace UnitTesting.Services
         public async Task<Answer> GetByIdAsync(Guid id)
         {
             return await context.Answers
-                .Where(question => question.Id == id
-                    && question.IsDeleted == false)
+                .Where(question => question.Id == id)
                 .FirstOrDefaultAsync();
         }
 
@@ -57,13 +56,22 @@ namespace UnitTesting.Services
 
         public async Task DeleteAsync(Answer question)
         {
-            context.Answers.Remove(question);
+            question.IsDeleted = true;
+            context.Attach(question);
+            context.Entry(question).Property("IsDeleted").IsModified = true;
+
             await context.SaveChangesAsync();
         }
 
         public async Task DeleteBulkAsync(IList<Answer> questions)
         {
-            context.Answers.RemoveRange(questions);
+            foreach (var question in questions)
+            {
+                question.IsDeleted = true;
+                context.Attach(question);
+                context.Entry(question).Property("IsDeleted").IsModified = true;
+            }
+
             await context.SaveChangesAsync();
         }
     }
