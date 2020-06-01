@@ -173,7 +173,7 @@ namespace UnitTesting.Tests.Services
             await service.DeleteAsync(answer);
 
             //Assert
-            context.Answers.Should().HaveCount(2);
+            context.Answers.FirstOrDefault(a => a.Id == answer.Id).IsDeleted.Should().Be(true);
         }
 
         [Test]
@@ -194,7 +194,8 @@ namespace UnitTesting.Tests.Services
             await service.DeleteBulkAsync(bulk);
 
             //Assert
-            context.Answers.Should().HaveCount(1);
+            context.Answers.FirstOrDefault(a => a.Id == answer1.Id).IsDeleted.Should().Be(true);
+            context.Answers.FirstOrDefault(a => a.Id == answer2.Id).IsDeleted.Should().Be(true);
         }
     }
 }

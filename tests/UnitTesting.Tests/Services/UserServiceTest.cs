@@ -120,7 +120,7 @@ namespace UnitTesting.Tests.Services
             await service.UpdateAsync(updatedUser);
 
             //Assert
-            context.Users.Where(user => user.Id == updatedUser.Id).FirstOrDefault()
+            context.Users.FirstOrDefault(user => user.Id == updatedUser.Id)
                 .Should().Be(updatedUser);
         }
 
@@ -174,7 +174,7 @@ namespace UnitTesting.Tests.Services
             await service.DeleteAsync(user);
 
             //Assert
-            context.Users.Should().HaveCount(2);
+            context.Users.FirstOrDefault(a => a.Id == user.Id).IsDeleted.Should().Be(true);
         }
 
         [Test]
@@ -195,7 +195,8 @@ namespace UnitTesting.Tests.Services
             await service.DeleteBulkAsync(bulk);
 
             //Assert
-            context.Users.Should().HaveCount(1);
+            context.Users.FirstOrDefault(a => a.Id == user1.Id).IsDeleted.Should().Be(true);
+            context.Users.FirstOrDefault(a => a.Id == user2.Id).IsDeleted.Should().Be(true);
         }
     }
 }

@@ -28,8 +28,7 @@ namespace UnitTesting.Services
             return await context.Questions
                 .AsNoTracking()
                 .Where(question =>
-                    question.Id == id
-                    && question.IsDeleted == false)
+                    question.Id == id)
                 .FirstOrDefaultAsync();
         }
 
