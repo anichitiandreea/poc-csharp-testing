@@ -1,39 +1,54 @@
+using AutoFixture;
+using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using FluentAssertions;
-using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using UnitTesting.Data;
 using UnitTesting.Domain;
 using Xunit;
 
 namespace UnitTesting.IntegrationTests.Controllers
 {
-    public class AnswerControllerTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class AnswerControllerTest : IClassFixture<CustomWebApplicationFactory<Startup>>, IDisposable
     {
         private readonly HttpClient client;
+        private readonly CustomWebApplicationFactory<Startup> factory;
+        private readonly IDbContextTransaction transaction;
+
         public AnswerControllerTest(CustomWebApplicationFactory<Startup> factory)
         {
             client = factory.CreateClient();
-
-            using (var scope = factory.Services.CreateScope())
-            {
-                var scopedServices = scope.ServiceProvider;
-                var dbContext = scopedServices.GetRequiredService<DatabaseContext>();
-                if (dbContext.Database.EnsureCreated())
-                {
-                    SeedData.PopulateTestData(dbContext);
-                }
-            }
+            this.factory = factory;
+            transaction = factory.databaseContext.Database.BeginTransaction();
         }
 
         [Fact]
         public async Task GetAllAsync()
         {
+            // Arrange
+            var fixture = new Fixture();
+            var user = fixture.Build<User>()
+                .Without(p => p.Answers)
+                .Without(p => p.Questions)
+                .Create();
+            var question = fixture.Build<Question>()
+                .Without(p => p.Answers)
+                .Create();
+            var answer = fixture.Create<Answer>();
+            answer.UserId = user.Id;
+            answer.QuestionId = question.Id;
+            question.UserId = user.Id;
+
+            factory.databaseContext.Users.Add(user);
+            factory.databaseContext.Questions.Add(question);
+            factory.databaseContext.Answers.Add(answer);
+            factory.databaseContext.SaveChanges();
+
             // The endpoint or route of the controller action.
             var httpResponse = await client.GetAsync("/answers");
 
@@ -42,39 +57,68 @@ namespace UnitTesting.IntegrationTests.Controllers
 
             // Deserialize and examine results.
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
-            var answer = JsonConvert.DeserializeObject<List<Answer>>(stringResponse);
+            var response = JsonConvert.DeserializeObject<List<Answer>>(stringResponse);
 
-            Assert.Contains(answer, p => p.Description == "Description1");
+            Assert.Contains(response, p => p.Description == answer.Description);
         }
 
         [Fact]
         public async Task GetByIdAsync()
         {
+            // Arrange
+            var fixture = new Fixture();
+            var user = fixture.Build<User>()
+                .Without(p => p.Answers)
+                .Without(p => p.Questions)
+                .Create();
+            var question = fixture.Build<Question>()
+                .Without(p => p.Answers)
+                .Create();
+            var answer = fixture.Create<Answer>();
+            answer.UserId = user.Id;
+            answer.QuestionId = question.Id;
+            question.UserId = user.Id;
+
+            factory.databaseContext.Users.Add(user);
+            factory.databaseContext.Questions.Add(question);
+            factory.databaseContext.Answers.Add(answer);
+            factory.databaseContext.SaveChanges();
+
             // The endpoint or route of the controller action.
-            var httpResponse = await client.GetAsync("/answers/852b5984-0dc4-459e-a3a8-0a81b0e1a2a5");
+            var httpResponse = await client.GetAsync($"/answers/{answer.Id}");
 
             // Must be successful.
             httpResponse.EnsureSuccessStatusCode();
 
             // Deserialize and examine results.
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
-            var answer = JsonConvert.DeserializeObject<Answer>(stringResponse);
+            var response = JsonConvert.DeserializeObject<Answer>(stringResponse);
 
-            answer.Description.Should().Be("Description2");
+            response.Description.Should().Be(answer.Description);
         }
 
         [Fact]
         public async Task CreateAsync()
         {
-            var rawAnswer = new Answer
-            {
-                UserId = new Guid("9876deb5-27ed-41c1-8998-86c998275acf"),
-                QuestionId = new Guid("c75f9e5e-c01b-4acd-b504-d412c14756f4"),
-                Description = "Created answer",
-                IsDeleted = false
-            };
+            // Arrange
+            var fixture = new Fixture();
+            var user = fixture.Build<User>()
+                .Without(p => p.Answers)
+                .Without(p => p.Questions)
+                .Create();
+            var question = fixture.Build<Question>()
+                .Without(p => p.Answers)
+                .Create();
+            var answer = fixture.Create<Answer>();
+            answer.UserId = user.Id;
+            answer.QuestionId = question.Id;
+            question.UserId = user.Id;
 
-            var myContent = JsonConvert.SerializeObject(rawAnswer);
+            factory.databaseContext.Users.Add(user);
+            factory.databaseContext.Questions.Add(question);
+            factory.databaseContext.SaveChanges();
+
+            var myContent = JsonConvert.SerializeObject(answer);
             var httpContent = new StringContent(myContent, Encoding.UTF8, "application/json");
 
             // The endpoint or route of the controller action.
@@ -85,34 +129,35 @@ namespace UnitTesting.IntegrationTests.Controllers
 
             // Deserialize and examine results.
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
-            var answer = JsonConvert.DeserializeObject<Answer>(stringResponse);
+            var response = JsonConvert.DeserializeObject<Answer>(stringResponse);
 
-            answer.Description.Should().Be("Created answer");
+            response.Description.Should().Be(answer.Description);
         }
 
         [Fact]
         public async Task CreateBulkAsync()
         {
-            var answer1 = new Answer
-            {
-                UserId = new Guid("9876deb5-27ed-41c1-8998-86c998275acf"),
-                QuestionId = new Guid("c75f9e5e-c01b-4acd-b504-d412c14756f4"),
-                Description = "Created Description1",
-                IsDeleted = false
-            };
+            // Arrange
+            var fixture = new Fixture();
+            var user = fixture.Build<User>()
+                .Without(p => p.Answers)
+                .Without(p => p.Questions)
+                .Create();
+            var question = fixture.Build<Question>()
+                .Without(p => p.Answers)
+                .Create();
+            var answer = fixture.Create<Answer>();
+            answer.UserId = user.Id;
+            answer.QuestionId = question.Id;
+            question.UserId = user.Id;
 
-            var answer2 = new Answer
-            {
-                UserId = new Guid("9876deb5-27ed-41c1-8998-86c998275acf"),
-                QuestionId = new Guid("c75f9e5e-c01b-4acd-b504-d412c14756f4"),
-                Description = "Created Description2",
-                IsDeleted = false
-            };
+            factory.databaseContext.Users.Add(user);
+            factory.databaseContext.Questions.Add(question);
+            factory.databaseContext.SaveChanges();
 
             var answerList = new List<Answer>
             {
-                answer1,
-                answer2
+                answer
             };
 
             var myContent = JsonConvert.SerializeObject(answerList);
@@ -126,24 +171,38 @@ namespace UnitTesting.IntegrationTests.Controllers
 
             // Deserialize and examine results.
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
-            var answers = JsonConvert.DeserializeObject<List<Answer>>(stringResponse);
+            var response = JsonConvert.DeserializeObject<List<Answer>>(stringResponse);
 
-            ((IEnumerable)answers).Should().HaveCount(2);
+            ((IEnumerable)response).Should().HaveCount(1);
         }
 
         [Fact]
         public async Task UpdateAsync()
         {
-            var answer1 = new Answer
-            {
-                Id = new Guid("e5e1d944-3296-4532-adfa-00ec05eb2cfa"),
-                UserId = new Guid("9876deb5-27ed-41c1-8998-86c998275acf"),
-                QuestionId = new Guid("c75f9e5e-c01b-4acd-b504-d412c14756f4"),
-                Description = "Description1",
-                IsDeleted = false
-            };
+            // Arrange
+            var fixture = new Fixture();
+            var user = fixture.Build<User>()
+                .Without(p => p.Answers)
+                .Without(p => p.Questions)
+                .Create();
+            var question = fixture.Build<Question>()
+                .Without(p => p.Answers)
+                .Create();
+            var answer = fixture.Create<Answer>();
+            answer.UserId = user.Id;
+            answer.QuestionId = question.Id;
+            question.UserId = user.Id;
 
-            var myContent = JsonConvert.SerializeObject(answer1);
+            factory.databaseContext.Users.Add(user);
+            factory.databaseContext.Questions.Add(question);
+            factory.databaseContext.Answers.Add(answer);
+            factory.databaseContext.SaveChanges();
+            factory.databaseContext.Entry(answer).State = EntityState.Detached;
+            factory.databaseContext.SaveChanges();
+
+            answer.Description = "Updated description";
+
+            var myContent = JsonConvert.SerializeObject(answer);
             var httpContent = new StringContent(myContent, Encoding.UTF8, "application/json");
 
             // The endpoint or route of the controller action.
@@ -154,36 +213,38 @@ namespace UnitTesting.IntegrationTests.Controllers
 
             // Deserialize and examine results.
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
-            var answer = JsonConvert.DeserializeObject<Answer>(stringResponse);
+            var response = JsonConvert.DeserializeObject<Answer>(stringResponse);
 
-            answer.Description.Should().Be("Description1");
+            response.Description.Should().Be(answer.Description);
         }
 
         [Fact]
         public async Task UpdateBulkAsync()
         {
-            var answer1 = new Answer
-            {
-                Id = new Guid("e5e1d944-3296-4532-adfa-00ec05eb2cfa"),
-                UserId = new Guid("9876deb5-27ed-41c1-8998-86c998275acf"),
-                QuestionId = new Guid("c75f9e5e-c01b-4acd-b504-d412c14756f4"),
-                Description = "Description1",
-                IsDeleted = false
-            };
+            // Arrange
+            var fixture = new Fixture();
+            var user = fixture.Build<User>()
+                .Without(p => p.Answers)
+                .Without(p => p.Questions)
+                .Create();
+            var question = fixture.Build<Question>()
+                .Without(p => p.Answers)
+                .Create();
+            var answer = fixture.Create<Answer>();
+            answer.UserId = user.Id;
+            answer.QuestionId = question.Id;
+            question.UserId = user.Id;
 
-            var answer2 = new Answer
-            {
-                Id = new Guid("852b5984-0dc4-459e-a3a8-0a81b0e1a2a5"),
-                UserId = new Guid("9876deb5-27ed-41c1-8998-86c998275acf"),
-                QuestionId = new Guid("c75f9e5e-c01b-4acd-b504-d412c14756f4"),
-                Description = "Description2",
-                IsDeleted = false
-            };
+            factory.databaseContext.Users.Add(user);
+            factory.databaseContext.Questions.Add(question);
+            factory.databaseContext.Answers.Add(answer);
+            factory.databaseContext.SaveChanges();
+            factory.databaseContext.Entry(answer).State = EntityState.Detached;
+            factory.databaseContext.SaveChanges();
 
             var answerList = new List<Answer>
             {
-                answer1,
-                answer2
+                answer
             };
 
             var myContent = JsonConvert.SerializeObject(answerList);
@@ -199,54 +260,76 @@ namespace UnitTesting.IntegrationTests.Controllers
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
             var answers = JsonConvert.DeserializeObject<List<Answer>>(stringResponse);
 
-            ((IEnumerable)answers).Should().HaveCount(2);
+            ((IEnumerable)answers).Should().HaveCount(1);
         }
 
         [Fact]
         public async Task DeleteAsync()
         {
+            // Arrange
+            var fixture = new Fixture();
+            var user = fixture.Build<User>()
+                .Without(p => p.Answers)
+                .Without(p => p.Questions)
+                .Create();
+            var question = fixture.Build<Question>()
+                .Without(p => p.Answers)
+                .Create();
+            var answer = fixture.Create<Answer>();
+            answer.UserId = user.Id;
+            answer.QuestionId = question.Id;
+            question.UserId = user.Id;
+
+            factory.databaseContext.Users.Add(user);
+            factory.databaseContext.Questions.Add(question);
+            factory.databaseContext.Answers.Add(answer);
+            factory.databaseContext.SaveChanges();
+
             // The endpoint or route of the controller action.
-            var httpResponse = await client.DeleteAsync("/answers/852b5984-0dc4-459e-a3a8-0a81b0e1a2a5");
+            var httpResponse = await client.DeleteAsync($"/answers/{answer.Id}");
 
             // Must be successful.
             httpResponse.EnsureSuccessStatusCode();
 
             // Deserialize and examine results.
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
-            var answer = JsonConvert.DeserializeObject<Answer>(stringResponse);
+            var response = JsonConvert.DeserializeObject<Answer>(stringResponse);
 
-            answer.IsDeleted.Should().Be(true);
+            response.IsDeleted.Should().Be(true);
         }
 
         [Fact]
         public async Task DeleteBulkAsync()
         {
-            var answer1 = new Answer
-            {
-                Id = new Guid("e5e1d944-3296-4532-adfa-00ec05eb2cfa"),
-                UserId = new Guid("9876deb5-27ed-41c1-8998-86c998275acf"),
-                QuestionId = new Guid("c75f9e5e-c01b-4acd-b504-d412c14756f4"),
-                Description = "Description1",
-                IsDeleted = false
-            };
+            // Arrange
+            var fixture = new Fixture();
+            var user = fixture.Build<User>()
+                .Without(p => p.Answers)
+                .Without(p => p.Questions)
+                .Create();
+            var question = fixture.Build<Question>()
+                .Without(p => p.Answers)
+                .Create();
+            var answer = fixture.Create<Answer>();
+            answer.UserId = user.Id;
+            answer.QuestionId = question.Id;
+            question.UserId = user.Id;
 
-            var answer2 = new Answer
-            {
-                Id = new Guid("852b5984-0dc4-459e-a3a8-0a81b0e1a2a5"),
-                UserId = new Guid("9876deb5-27ed-41c1-8998-86c998275acf"),
-                QuestionId = new Guid("c75f9e5e-c01b-4acd-b504-d412c14756f4"),
-                Description = "Description2",
-                IsDeleted = false
-            };
+            factory.databaseContext.Users.Add(user);
+            factory.databaseContext.Questions.Add(question);
+            factory.databaseContext.Answers.Add(answer);
+            factory.databaseContext.SaveChanges();
+            factory.databaseContext.Entry(answer).State = EntityState.Detached;
+            factory.databaseContext.SaveChanges();
 
             var answerList = new List<Answer>
             {
-                answer1,
-                answer2
+                answer
             };
 
             var myContent = JsonConvert.SerializeObject(answerList);
-            var request = new HttpRequestMessage {
+            var request = new HttpRequestMessage
+            {
                 Method = HttpMethod.Delete,
                 RequestUri = new Uri("/answers/bulk", UriKind.Relative),
                 Content = new StringContent(myContent, Encoding.UTF8, "application/json")
@@ -261,6 +344,12 @@ namespace UnitTesting.IntegrationTests.Controllers
             var answers = JsonConvert.DeserializeObject<List<Answer>>(stringResponse);
 
             answers.Should().OnlyContain(question => question.IsDeleted == true);
+        }
+
+        public void Dispose()
+        {
+            transaction.Rollback();
+            transaction.Dispose();
         }
     }
 }
