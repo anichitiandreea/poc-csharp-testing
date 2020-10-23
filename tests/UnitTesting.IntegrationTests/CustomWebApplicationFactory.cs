@@ -16,12 +16,12 @@ namespace UnitTesting.IntegrationTests
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.ConfigureServices(services => {
-                // We need to remove DatabaseContext service descriptor 
+                // We need to remove DatabaseContext service descriptor
                 // because Startup has already registered the context
                 var serviceDescriptor = services
-                    .FirstOrDefault(serviceDescriptor => 
+                    .FirstOrDefault(serviceDescriptor =>
                         serviceDescriptor.ServiceType == typeof(DbContextOptions<DatabaseContext>));
-                
+
                 if(serviceDescriptor != null)
                 {
                     services.Remove(serviceDescriptor);

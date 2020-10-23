@@ -1,10 +1,12 @@
-﻿using FluentAssertions;
+﻿using AutoFixture;
+using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UnitTesting.Data;
 using UnitTesting.Domain;
 using UnitTesting.Services;
 
@@ -29,16 +31,41 @@ namespace UnitTesting.Tests.Services
         [Test]
         public async Task GivenGetByIdAsyncWhenDataExistsThenReturnsData()
         {
-            //Arrange
-            var context = new FakeContext().GetContextWithData();
+            var options = new DbContextOptionsBuilder<DatabaseContext>()
+                .UseNpgsql("Server=localhost;Port=5432;Database=UnitTesting;User Id=postgres;Password=parola;")
+                .Options;
+            var context = new DatabaseContext(options);
+            var fixture = new Fixture();
+
+            var transaction = context.Database.BeginTransaction();
+
+            var user = fixture.Build<User>()
+            .Without(p => p.Answers)
+            .Without(p => p.Questions)
+            .Create();
+            var question = fixture.Build<Question>()
+                .Without(p => p.Answers)
+                .Create();
+            var answer = fixture.Create<Answer>();
+            answer.UserId = user.Id;
+            answer.QuestionId = question.Id;
+            question.UserId = user.Id;
+
+            context.Users.Add(user);
+            context.Questions.Add(question);
+            context.Answers.Add(answer);
+            context.SaveChanges();
+
             var service = new QuestionService(context);
-            var id = new Guid("3f0b1175-dbd1-44f3-a729-085c96c08dba");
+            var id = question.Id;
 
             //Act
             var result = await service.GetByIdAsync(id);
 
             //Assert
             result.Should().NotBeNull();
+            transaction.Rollback();
+            transaction.Dispose();
         }
 
         [Test]
