@@ -128,7 +128,7 @@ namespace UnitTesting.IntegrationTests.Controllers
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
             var answers = JsonConvert.DeserializeObject<List<Answer>>(stringResponse);
 
-            ((IEnumerable)answers).Should().HaveCount(2);
+            answers.Count.Should().Equals(2);
         }
 
         [Fact]
@@ -199,7 +199,7 @@ namespace UnitTesting.IntegrationTests.Controllers
             var stringResponse = await httpResponse.Content.ReadAsStringAsync();
             var answers = JsonConvert.DeserializeObject<List<Answer>>(stringResponse);
 
-            ((IEnumerable)answers).Should().HaveCount(2);
+            answers.Count.Should().Equals(2);
         }
 
         [Fact]
