@@ -1,22 +1,23 @@
-using FluentAssertions;
-using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using RestApi;
-using RestApi.Data;
-using RestApi.Domain;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
+using Newtonsoft.Json;
+using RestApi.Data;
+using RestApi.Domain;
 using Xunit;
 
 namespace IntegrationTests.Controllers
 {
-    public class UserControllerTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class UserControllerTest : IClassFixture<CustomWebApplicationFactory<Program>>
     {
         private readonly HttpClient client;
-        public UserControllerTest(CustomWebApplicationFactory<Startup> factory)
+        public UserControllerTest(CustomWebApplicationFactory<Program> factory)
         {
             client = factory.CreateClient();
 
