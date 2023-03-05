@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace UnitTesting.Migrations
+namespace RestApi.Migrations
 {
     public partial class Initial : Migration
     {

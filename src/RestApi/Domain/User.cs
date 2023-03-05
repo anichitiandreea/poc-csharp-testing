@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UnitTesting.Domain
+namespace RestApi.Domain
 {
     public class User : Entity
     {

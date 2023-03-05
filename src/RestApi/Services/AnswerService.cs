@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UnitTesting.Data;
-using UnitTesting.Domain;
-using UnitTesting.Services.Interfaces;
+using RestApi.Data;
+using RestApi.Domain;
+using RestApi.Services.Interfaces;
 
-namespace UnitTesting.Services
+namespace RestApi.Services
 {
     public class AnswerService : IAnswerService
     {

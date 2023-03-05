@@ -1,7 +1,7 @@
 ﻿using Bogus;
-using UnitTesting.Domain;
+using RestApi.Domain;
 
-namespace UnitTesting.DataFaker
+namespace RestApi.DataFaker
 {
     public sealed class DataFaker : IDataFaker
     {

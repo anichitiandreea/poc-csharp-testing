@@ -2,10 +2,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using RestApi;
+using RestApi.Data;
 using System.Linq;
-using UnitTesting.Data;
 
-namespace UnitTesting.IntegrationTests
+namespace IntegrationTests
 {
     public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<Startup>
     {

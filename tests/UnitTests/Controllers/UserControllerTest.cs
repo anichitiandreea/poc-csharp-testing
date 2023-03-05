@@ -6,11 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using UnitTesting.Controllers;
-using UnitTesting.Domain;
-using UnitTesting.Services.Interfaces;
+using RestApi.Controllers;
+using RestApi.Domain;
+using RestApi.Services.Interfaces;
 
-namespace UnitTesting.Tests.Controllers
+namespace UnitTests.Controllers
 {
     [Property("NUnit", "Controller | User")]
     public class UserControllerTest

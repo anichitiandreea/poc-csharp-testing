@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 using System;
-using UnitTesting.DataFaker;
+using RestApi.DataFaker;
 
-namespace UnitTesting.Tests.Domain
+namespace UnitTests.Domain
 {
     [Property("NUnit", "Domain | Answer")]
     public class AnswerTest
@@ -11,7 +11,7 @@ namespace UnitTesting.Tests.Domain
         public void GivenAnswerEntityWhenGeneratedWithDataFakerThenVerifyAllProperties()
         {
             //Arrange
-            IDataFaker dataFaker = new DataFaker.DataFaker();
+            IDataFaker dataFaker = new DataFaker();
 
             //Act
             var answers = dataFaker.FakeAnswer.Generate(count: 99);

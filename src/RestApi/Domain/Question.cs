@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UnitTesting.Domain
+namespace RestApi.Domain
 {
     public class Question : Entity
     {

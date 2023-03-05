@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using UnitTesting.Data;
-using UnitTesting.Services;
-using UnitTesting.Services.Interfaces;
+using RestApi.Data;
+using RestApi.Services;
+using RestApi.Services.Interfaces;
 
-namespace UnitTesting
+namespace RestApi
 {
     public class Startup
     {

@@ -1,4 +1,4 @@
-﻿namespace UnitTesting.Abstractions
+﻿namespace RestApi.Abstractions
 {
     public interface IDeletable
     {

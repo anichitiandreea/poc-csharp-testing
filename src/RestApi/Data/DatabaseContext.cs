@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UnitTesting.Data.Configurations;
-using UnitTesting.Domain;
+using RestApi.Data.Configurations;
+using RestApi.Domain;
 
-namespace UnitTesting.Data
+namespace RestApi.Data
 {
     public class DatabaseContext : DbContext
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UnitTesting.Domain
+namespace RestApi.Domain
 {
     public class Answer : Entity
     {

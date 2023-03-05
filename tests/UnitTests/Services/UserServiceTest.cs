@@ -5,10 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UnitTesting.Domain;
-using UnitTesting.Services;
+using RestApi.Domain;
+using RestApi.Services;
 
-namespace UnitTesting.Tests.Services
+namespace UnitTests.Services
 {
     public class UserServiceTest
     {

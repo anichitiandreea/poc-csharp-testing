@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using UnitTesting.Domain;
-using UnitTesting.Services.Interfaces;
+using RestApi.Domain;
+using RestApi.Services.Interfaces;
 
-namespace UnitTesting.Controllers
+namespace RestApi.Controllers
 {
     [ApiController]
     public class QuestionController : ControllerBase

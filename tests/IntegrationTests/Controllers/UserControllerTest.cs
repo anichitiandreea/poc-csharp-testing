@@ -1,17 +1,17 @@
+using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using RestApi;
+using RestApi.Data;
+using RestApi.Domain;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using FluentAssertions;
-using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using UnitTesting.Data;
-using UnitTesting.Domain;
 using Xunit;
 
-namespace UnitTesting.IntegrationTests.Controllers
+namespace IntegrationTests.Controllers
 {
     public class UserControllerTest : IClassFixture<CustomWebApplicationFactory<Startup>>
     {

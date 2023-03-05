@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
-using UnitTesting.DataFaker;
-using UnitTesting.Domain;
+using RestApi.DataFaker;
+using RestApi.Domain;
 
-namespace UnitTesting.Tests.Domain
+namespace UnitTests.Domain
 {
     [Property("NUnit", "Domain | User")]
     public class UserTest
@@ -12,7 +12,7 @@ namespace UnitTesting.Tests.Domain
         public void GivenUserEntityWhenGeneratedWithDataFakerThenVerifyAllProperties()
         {
             //Arrange
-            IDataFaker dataFaker = new DataFaker.DataFaker();
+            IDataFaker dataFaker = new DataFaker();
 
             //Act
             var users = dataFaker.FakeUser.Generate(count: 99);

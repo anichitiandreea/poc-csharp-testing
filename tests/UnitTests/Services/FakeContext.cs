@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using UnitTesting.Data;
-using UnitTesting.Domain;
+using RestApi.Data;
+using RestApi.Domain;
 
-namespace UnitTesting.Tests.Services
+namespace UnitTests.Services
 {
     public class FakeContext
     {

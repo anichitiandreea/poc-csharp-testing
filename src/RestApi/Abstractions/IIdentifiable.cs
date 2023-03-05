@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UnitTesting.Abstractions
+namespace RestApi.Abstractions
 {
     public interface IIdentifiable
     {

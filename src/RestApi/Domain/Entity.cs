@@ -1,7 +1,7 @@
 ﻿using System;
-using UnitTesting.Abstractions;
+using RestApi.Abstractions;
 
-namespace UnitTesting.Domain
+namespace RestApi.Domain
 {
     public abstract class Entity : IIdentifiable, IDeletable
     {

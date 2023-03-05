@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using UnitTesting.Data;
+using RestApi.Data;
 
-namespace UnitTesting.Migrations
+namespace RestApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
     [Migration("20200328065749_Initial")]

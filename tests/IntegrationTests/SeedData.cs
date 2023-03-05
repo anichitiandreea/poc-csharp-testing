@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using System;
-using UnitTesting.Data;
-using UnitTesting.Domain;
+using RestApi.Data;
+using RestApi.Domain;
 
-namespace UnitTesting.IntegrationTests
+namespace IntegrationTests
 {
     public static class SeedData
     {

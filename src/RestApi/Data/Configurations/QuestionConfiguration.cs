@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using UnitTesting.Domain;
+using RestApi.Domain;
 
-namespace UnitTesting.Data.Configurations
+namespace RestApi.Data.Configurations
 {
     public class QuestionConfiguration : IEntityTypeConfiguration<Question>
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnitTesting.Domain;
+using RestApi.Domain;
 
-namespace UnitTesting.Services.Interfaces
+namespace RestApi.Services.Interfaces
 {
     public interface IQuestionService
     {
