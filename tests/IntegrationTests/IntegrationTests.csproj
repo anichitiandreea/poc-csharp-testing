@@ -20,6 +20,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\UnitTesting\UnitTesting.csproj" />
+    <ProjectReference Include="..\..\src\Testing\Testing.csproj" />
   </ItemGroup>
 </Project>
